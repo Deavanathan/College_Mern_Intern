@@ -1,0 +1,173 @@
+commands
+
+
+node install 
+npm install
+
+
+
+
+export default function About(){
+    return (
+        <>
+        <h2>Enna pathi solrathukku edhuvum illa !!</h2>
+        </>
+    )
+}
+
+
+export default function About(){
+    return (
+        <>
+        <h2>Enna pathi solrathukku edhuvum illa !!</h2>
+        </>
+    )
+}
+
+const myMessage = 'Hello world'
+console.log(myMessage)
+// String a="luffy"
+=============================
+
+
+ const myMessage = 'Hello world'
+console.log("my data is: ",myMessage)
+// my data is: 
+================================
+ const myName = 'sai'
+ const myRoll=12
+console.log("my name is: ",myName,"my roll is: ",myRoll)
+console.log(my name is: ${myName} and my roll is ${myRoll})
+// my data is: sai my roll is: 12 
+=============================================
+let     reassign  redeclare function scope
+var     reassign  no        block scope
+const   no        no        block scope
+=================================
+ const myName = 'sai'
+ myName='ram'
+console.log(`my name is: ${myName} `)
+// my data is: sai my roll is: 12  // err
+
+======================================
+ var myName = 'luffy'
+ myName='ram'
+  
+console.log(`my name is: ${myName} `)
+// my data is: sai my roll is: 12 
+=============================================
+ let myName = 'sai'
+ myName='ram'
+  
+console.log(`my name is: ${myName} `)
+// my data is: sai my roll is: 12 
+====================================
+var myName = 'sai'
+function disp(){
+  myName = 'ram'
+  console.log('im inside the fun: ',myName)
+if(true){
+     myName = 'luffy'
+console.log('im inside the block: ',myName)
+}
+}
+disp()
+console.log('im inside the fun: ',myName)
+============================
+const myName='outside'
+function disp(){
+  const myName = 'inside func'
+  console.log('im inside the fun: ',myName)
+if(true){
+     const myName = 'inside the block'
+console.log('im inside the block: ',myName)
+}
+}
+disp()
+console.log('im outside the function: ',myName)
+
+======================================
+var myName='1'
+function disp(){
+
+if(false){
+     var myName = '2'
+}
+console.log('im inside the block: ',myName)
+}
+disp()
+console.log('im outside the function: ',myName)
+
+=========================
+let myName='1'
+function disp(){
+if(true){
+     let myName = '2'
+}
+console.log('im inside the block: ',myName)
+}
+disp()
+console.log('im outside the function: ',myName)
+
+==============================
+ //var b=10
+function disp() {
+  //let a=10
+    b=10
+  }
+disp()
+//console.log(a);
+ console.log(b);
+
+ 
+============================
+  const person={
+    roll:23,
+    stuName:"sai"
+  }
+  person.stuName="ram"
+  console.log(person.stuName);
+const per=[12,'nan',90,89]
+  const a=[23,1,4,6]
+  /*
+ {
+  0:23
+  1:1
+  2:4
+  3:6
+  }
+  */
+  a[0]=45
+ console.log(a);
+
+  ==========================   a='sai'
+   b="ram"
+  c=`hai erwer
+  weerewrewrewrw werwerwerwe werwerewrewr `
+ console.log(a);
+ console.log(b);
+ console.log(c);
+
+  
+ 
+===============================
+console.log("Hello, World!");a = 12;
+b = 32432423442343242342342222222222n;
+c = Infinity;
+ d = 10 / 0;
+ e = 5 < Infinity;
+ d = 'hai' * 3;
+f=NaN
+console.log(a);
+console.log(b);
+console.log(c);
+console.log(d);
+console.log(e);
+ console.log(d);
+  console.log(f);
+=========================================
+let a= false
+let b= true
+console.log(a)
+console.log(b)
+console.log (typeof (a))

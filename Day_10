@@ -1,0 +1,134 @@
+Day 10
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Webpage</title>
+</head>
+<body>
+    <h1>Welcome to My Simple Webpage</h1>
+</body>
+</html>
+
+const express = require('express');
+const bodyParser = require('body-parser');
+const exhbs = require('express-handlebars');
+const dbo = require('./db2');
+
+const {ObjectId } = require('mongodb')
+
+/* Create an instance of express */
+const app = express();
+
+app.engine('hbs',
+    exhbs.engine({
+        layoutsDir:'viewsfold',
+        defaultLayout:'main2',
+        extname:'hbs'}));
+
+
+app.set('view engine', 'hbs');
+app.set('views', 'viewsfold');
+app.use(bodyParser.urlencoded({extended: true}));
+
+
+app.get('/', async(req, res) => {
+    let database  = await dbo.getDatabase();
+    const collection = database.collection('detail');
+    
+    
+    //await collection.insertOne({id:1,name:'Luffy',age:20,bounty:300000000,status:'Emperor of the Sea'})
+    
+
+    const cursor = await collection.find({});
+    let pirates = await cursor.toArray();
+    let msg = '';
+    let edit_id =''
+    let edit_pirates = ''
+
+    if(req.query.edit_man){
+        edit_id = req.query.edit_man;
+        edit_emp = await collection.findOne({_id:new ObjectId(edit_id)});
+    }
+
+    if(req.query.delete_man){
+        delete_id = req.query.delete_man;
+        console.log('Delete request for the id: ',delete_id);
+        await collection.deleteOne({ _id: new ObjectId(delete_id) });
+        res.redirect('/?status=3')
+    }
+
+
+    if(req.query.status === '1'){
+        msg = 'Data Inserted Successfully';
+    }
+    if(req.query.status === '3'){
+        msg = 'Data Deleted Successfully';
+    } 
+    res.render('main2', {msg,pirates,edit_id,edit_pirates});
+})
+
+
+
+app.post('/pirateinfo', async(req, res) => {
+    const database = await dbo.getDatabase();
+    const collection = database.collection('detail');
+    const pirates = {id:req.body.id,name:req.body.name,age:req.body.age,bounty:req.body.bounty,status:req.body.status};
+    await collection.insertOne(pirates);
+    
+    res.redirect('/?status=1');
+})
+
+
+app.post('/updateinfo/:id',async(req,res)=>{
+    const database = await dbo.getDatabase();
+    const collection = database.collection('detail');
+    const pirates = {id : req.body.id,name: req.body.name,age: req.body.age,bounty: req.body.bounty,status: req.body.status};
+    let id = req.params.id;
+    await collection.updateOne({_id:new ObjectId(id)},{$set:pirates});
+
+    res.redirect('/?status=2');
+})
+
+app.listen(5000, () =>{
+    console.log('Listening on port 5000...');
+    for(let i=0; i<5; i++){
+        console.log('Server is running...');
+    }
+})
+
+
+
+const mongodb = require('mongodb');
+const mongoClient = mongodb.MongoClient;
+
+{/* import {MongoClient} from 'mongodb'; */}
+
+const url = 'mongodb://localhost:27017';
+let database;
+const objectId = mongodb.ObjectId;
+
+async function getDatabase(){
+    const client = await mongoClient.connect(url);
+
+    database = client.db('details');
+    if(database){
+        console.log('Connected to database');
+    }
+    else{
+        console.error('Database connection failed');
+    }
+
+    return database;
+
+}
+
+module.exports = {getDatabase, objectId};
+
+
+
+
+

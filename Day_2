@@ -1,0 +1,46 @@
+Day 2
+
+import { useParams } from "react-router-dom";
+import { useSelector } from 'react-redux';
+
+export default function User() {
+    const users = useSelector((state) => state.userInfo.eusers);
+    //const { id } = useParams();
+
+    return (
+        <>
+            {console.log("the users", users)} 
+            
+
+            {users.map((user, index) => (
+                <div key={index}>
+                    <h1>{user.name}</h1>
+                    <h1>{user.roll}</h1>
+                    <h1>{user.city}</h1>
+                </div>
+            ))}
+        </>
+    );
+}
+
+
+
+
+let a=[12,4,"sai",23.4]
+console.log("b4 del",a.length)
+res=delete a[1]
+console.log(a)
+
+console.log("after del",a.length)
+
+for(let i=0;i<a.length;i++)
+console.log(a[i])
+
+==========================
+let a=[12,4,1]
+var s=0
+ 
+
+for(let i=0;i<a.length;i++)
+s=s+a[i]
+console.log(s)
